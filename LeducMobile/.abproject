@@ -1,0 +1,45 @@
+{
+  "ProjectName": "LeducMobile",
+  "ProjectGuid": "57bd3a9a-0886-4f03-ad4b-2ecb67115c6d",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.LeducMobile",
+  "DisplayName": "LeducMobile",
+  "Author": "",
+  "Description": "LeducMobile",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "3.7.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "false",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{bb39f286-d8ea-4737-872d-39ede8ab4f23}",
+  "WP8ProductID": "{8a5f7a0e-604b-4d9b-b91c-5a3e5f3afc2e}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.LeducMobile",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
