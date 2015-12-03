@@ -41,7 +41,8 @@
           "subHeaderField": "Address",
           "filterField": "Address",
           "masterDetails": true,
-          "detailHeaderField": "HomeTel",
+          "detailHeaderField": "CustomerName",
+          "detailSubHeaderField": "Email",
           "pullToRefresh": false,
           "endlessScroll": false
         }

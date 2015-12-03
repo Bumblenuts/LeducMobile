@@ -88,8 +88,8 @@ app.customerView = kendo.observable({
                 var item = e.view.params.uid,
                     dataSource = customerViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
-                if (!itemModel.HomeTel) {
-                    itemModel.HomeTel = String.fromCharCode(160);
+                if (!itemModel.CustomerName) {
+                    itemModel.CustomerName = String.fromCharCode(160);
                 }
                 customerViewModel.set('currentItem', itemModel);
             },
