@@ -1,16 +1,20 @@
+
 <div data-role="view" data-title="Details" data-model="app.customerView.customerViewModel" data-bind="events: { show: detailsShow }">
-    <header data-role="header">
-        <div data-role="navbar" class="header-text">
-            <a data-role="backbutton" data-align="left">Back</a>
-            <span data-bind="text: currentItem.CustomerName" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: center; display: block; margin-left: 70px; margin-right: 70px;"></span>
-        </div>
-    </header>
+        <header data-role="header">
+            <div data-role="navbar" class="header-text">
+                <a data-role="backbutton" data-align="left">Back</a>
+                <a data-role="button" data-bind="{click: app.customerViewModel.addClick }" data-align="right">Edit</a>
+                <span data-bind="text: currentItem.CustomerName" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: center; display: block; margin-left: 70px; margin-right: 70px;"></span>
+            </div>
+        </header>
 
-    <h3 data-bind="text: currentItem.Email"></h3>
+        <!-- START_CUSTOM_CODE_customerViewModel -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
+    <p>Address:</p><h3 data-bind="text: currentItem.Address"></h3>
+    <p>Home Tel:</p><h3 data-bind="text: currentItem.HomeTel"></h3>
+    <p>Mobile:</p><h3 data-bind="text: currentItem.Mobile"></h3>
+    <p>Email:</p><h3 data-bind="text: currentItem.Email"></h3>
 
-    <!-- START_CUSTOM_CODE_customerViewModel -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_customerViewModel -->
-</div>
+        <!-- END_CUSTOM_CODE_customerViewModel -->
+    </div>

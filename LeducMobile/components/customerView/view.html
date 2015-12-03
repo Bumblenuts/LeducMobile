@@ -1,20 +1,26 @@
 <div data-role="view" data-title="Customers" data-layout="main" data-model="app.customerView" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow">
 
+    <!--<div data-role="view" data-title="Customers" data-layout="main" data-model="app.customerView" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow">-->
+
     <!-- START_CUSTOM_CODE_customerView -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    <!-- Add custom code here.  -->
+
+    <a data-role="button" data-bind="{click: customerViewModel.addClick }" data-align="right">Add</a>   
 
     <!-- END_CUSTOM_CODE_customerView -->
-    <ul data-role="listview" data-style="inset" data-template="customerViewModelTemplate" data-bind="{ source: customerViewModel.dataSource, events: {click: customerViewModel.itemClick}}" data-pull-to-refresh="false" data-endless-scroll="false" data-filterable="{field: 'Address', operator: 'contains'}">
-    </ul>
+    <ul data-role="listview" data-style="inset" data-template="customerViewModelTemplate" data-bind="{ source: customerViewModel.dataSource, events: {click: customerViewModel.itemClick}}" data-pull-to-refresh="false" data-endless-scroll="false" data-filterable="{field: 'Address', operator: 'contains'}"></ul>
     <!-- START_CUSTOM_CODE_customerViewModel -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
+    <!-- Add custom code here. -->
     <!-- END_CUSTOM_CODE_customerViewModel -->
     <script type="text/x-kendo-template" id="customerViewModelTemplate">
         <div class="image-with-text">
             <img src="#: data['PhotoUrl'] #" width="30%" height="30%">
             <h3>#: data['CustomerName'] #</h3>
             <p>#: data['Address'] #</p>
+            <p>#: data['HomeTel'] #</p>
+            <p>#: data['Mobile'] #</p>
+            <p>#: data['Email'] #</p>
         </div>
     </script>
 </div>
+

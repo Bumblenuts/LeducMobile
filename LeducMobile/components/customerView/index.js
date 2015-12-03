@@ -70,6 +70,18 @@ app.customerView = kendo.observable({
                             field: 'Address',
                             defaultValue: ''
                         },
+                        'HomeTel': {
+                            field: 'HomeTel',
+                            defaultValue: ''
+                        },
+                        'Mobile': {
+                            field: 'Mobile',
+                            defaultValue: ''
+                        },
+                        'Email': {
+                            field: 'Email',
+                            defaultValue: ''
+                        },
                         'Photo': {
                             field: 'Photo',
                             defaultValue: ''
@@ -77,14 +89,21 @@ app.customerView = kendo.observable({
                     }
                 }
             },
+            serverFiltering: true,
+            serverSorting: true,
+            serverPaging: true,
+            pageSize: 50
         },
         dataSource = new kendo.data.DataSource(dataSourceOptions),
         customerViewModel = kendo.observable({
+
             dataSource: dataSource,
-            itemClick: function(e) {
+
+            itemClick: function (e) {
                 app.mobileApp.navigate('#components/customerView/details.html?uid=' + e.dataItem.uid);
             },
-            detailsShow: function(e) {
+
+            detailsShow: function (e) {
                 var item = e.view.params.uid,
                     dataSource = customerViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
@@ -93,6 +112,37 @@ app.customerView = kendo.observable({
                 }
                 customerViewModel.set('currentItem', itemModel);
             },
+
+            addClick: function (e) {
+                //create a new item.....initialize it as you please
+                var item = { 'Name': '' };
+                //retrieve the data source
+                dataSource = customerViewModel.get('dataSource');
+                dataSource.add(item);
+                dataSource.sync();
+                item = dataSource.at(dataSource.total() - 1);
+                customerViewModel.set('currentItem', item);
+                app.mobileApp.navigate('#components/customerView/addCustomer.html?uid=' + item.uid);
+            },
+
+
+            editClick: function (e) {
+                //create a new item.....initialize it as you please
+                var item = { 'Name': '' };
+                //retrieve the data source
+                dataSource = customerViewModel.get('dataSource');
+                dataSource.add(item);
+                dataSource.sync();
+                item = dataSource.at(dataSource.total() - 1);
+                customerViewModel.set('currentItem', item);
+                app.mobileApp.navigate('#components/customerView/addCustomer.html?uid=' + item.uid);
+            },
+
+
+            saveChanges: function (e) {
+                dataSource.sync();
+            },
+
             currentItem: null
         });
 
