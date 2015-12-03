@@ -4,10 +4,20 @@
     {
       "type": "kendo-ui-mobile:view",
       "name": "homeView",
-      "components": [],
-      "title": "Home View",
-      "addToNavigation": true,
-      "icon": "home"
+      "components": [
+        {
+          "type": "kendo-ui-mobile:authentication",
+          "name": "homeViewModel",
+          "dataProvider": "leducMobile",
+          "emailLabel": "Email",
+          "passwordLabel": "Password",
+          "signinLabel": "Sign In",
+          "signinRedirect": "customerView",
+          "enableRegistration": false
+        }
+      ],
+      "title": "KLPS Snow Contracts",
+      "addToNavigation": false
     },
     {
       "type": "kendo-ui-mobile:view",
@@ -19,14 +29,39 @@
     },
     {
       "type": "kendo-ui-mobile:view",
-      "name": "contactsView",
-      "components": [],
-      "title": "Contacts",
+      "name": "customerView",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:list",
+          "name": "customerViewModel",
+          "dataProvider": "leducMobile",
+          "collection": "Customers",
+          "imageField": "Photo",
+          "headerField": "CustomerName",
+          "subHeaderField": "Address",
+          "filterField": "Address",
+          "masterDetails": true,
+          "detailHeaderField": "HomeTel",
+          "pullToRefresh": false,
+          "endlessScroll": false
+        }
+      ],
+      "title": "Customers",
       "addToNavigation": true,
-      "icon": "contacts"
+      "icon": "organize"
     }
   ],
-  "dataProviders": [],
+  "dataProviders": [
+    {
+      "type": "kendo-ui-mobile:dataProvider",
+      "name": "leducMobile",
+      "everliveUrl": "//platform.telerik.com/bs-api/v1/",
+      "title": "LeducMobile / LeducMobile",
+      "source": "everlive",
+      "everliveKey": "dv9510xeop6wzwvn",
+      "offlineStorage": true
+    }
+  ],
   "name": "kendoUiMobileApp",
   "navigation": "tabstrip",
   "view": "homeView",
