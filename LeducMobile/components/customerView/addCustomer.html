@@ -1,0 +1,78 @@
+
+<!--<div data-role="view" data-title="Details" data-model="app.customerView.customerViewModel" data-bind="events: { show: detailsShow }">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: currentItem.CustomerName" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: center; display: block; margin-left: 70px; margin-right: 70px;"></span>
+        </div>
+    </header>
+    <h3 data-bind="text: currentItem.Email"></h3>
+    <input type="text" data-bind="value: currentItem.CustomerName" />
+    <input type="text" data-bind="value: currentItem.HomeTel" />
+    <p data-bind="text: currentItem.email"></p>
+    <button data-bind="{click: saveChanges}">Save Changes</button>
+    <button data-bind="{click: saveChanges}">Delete Record</button>
+
+</div>-->
+
+
+
+
+<div data-role="view" data-title="addCustomer" data-layout="main-nonav" data-model="app.customerView.customerViewModel" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow" data-bind="events: { show: detailsShow }">
+
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: currentItem.CustomerName" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: center; display: block; margin-left: 70px; margin-right: 70px;"></span>
+        </div>
+    </header>
+
+    <div class="form-view">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li>
+                    <label>
+                        Customer Name:
+                        <input data-bind="value: currentItem.CustomerName" type="text">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Address:
+                        <input data-bind="value: currentItem.Address" type="text">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Home Tel:
+                        <input data-bind="value: currentItem.HomeTel" type="text">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Mobile:
+                        <input data-bind="value: currentItem.Mobile" type="text">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Email:
+                        <input data-bind="value: currentItem.Email" placeholder="example@example.com" type="email">
+                    </label>
+                </li>
+            </ul>
+
+            <div class="button-group">
+                <a data-role="backbutton">Cancel</a>
+                <a class="primary" data-role="button" data-bind="{click: saveChanges}">Save</a>
+            </div>
+        </form>
+        <!-- START_CUSTOM_CODE_addCustomerModel -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_addCustomerModel -->
+    </div>
+
+    <!-- START_CUSTOM_CODE_addCustomer -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    <!-- END_CUSTOM_CODE_addCustomer -->
+</div>
