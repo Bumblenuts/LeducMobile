@@ -1,5 +1,12 @@
 <div data-role="view" data-title="KLPS Snow Contracts" data-layout="main-nonav" data-model="app.homeView" data-show="app.homeView.onShow" data-after-show="app.homeView.afterShow">
+    <!--<a href="view.html">view.html</a>-->
+
     <div class="signin-view">
+
+         <img src="../../images/plowtruck.jpg"  class="centered"/>
+
+        <h3 align="center">Login</h3>
+
         <form>
             <ul data-role="listview" data-style="inset">
                 <li>
@@ -12,7 +19,7 @@
                         <input type="password" data-bind="value: homeViewModel.password" required>
                     </label>
                 </li>
-            </ul>
+            </ul>s
 
             <div class="button-group button-group-vertical">
                 <a data-role="button" class="primary" data-bind="events: { click: homeViewModel.signin }">Sign In</a>
@@ -20,16 +27,20 @@
             </div>
         </form>
     </div>
+
     <div class="offline" align="center" style="display:none;">
         You are currently offline. Before using this app in offline mode you must initialize it while you are online
     </div>
     <!-- START_CUSTOM_CODE_homeViewModel -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    <!-- Add custom code here. 
 
     <!-- END_CUSTOM_CODE_homeViewModel -->
 
     <!-- START_CUSTOM_CODE_homeView -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-    <h1 data-bind="html: title"></h1>
+    <!-- Add custom code here. 
+
+    <!--<h1 data-bind="html: title"></h1>-->
+
+
     <!-- END_CUSTOM_CODE_homeView -->
 </div>
