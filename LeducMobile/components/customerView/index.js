@@ -1,5 +1,5 @@
 'use strict';
-
+var storedItem;
 app.customerView = kendo.observable({
     onShow: function() {},
     afterShow: function() {}
@@ -105,11 +105,13 @@ app.customerView = kendo.observable({
 
             detailsShow: function (e) {
                 var item = e.view.params.uid,
+                
                     dataSource = customerViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
                 if (!itemModel.CustomerName) {
                     itemModel.CustomerName = String.fromCharCode(160);
                 }
+                storedItem = itemModel;
                 customerViewModel.set('currentItem', itemModel);
             },
 
@@ -127,15 +129,8 @@ app.customerView = kendo.observable({
 
 
             editClick: function (e) {
-                //create a new item.....initialize it as you please
-                var item = { 'Name': '' };
-                //retrieve the data source
-                dataSource = customerViewModel.get('dataSource');
-                dataSource.add(item);
-                dataSource.sync();
-                item = dataSource.at(dataSource.total() - 1);
-                customerViewModel.set('currentItem', item);
-                app.mobileApp.navigate('#components/customerView/addCustomer.html?uid=' + item.uid);
+
+                app.mobileApp.navigate('#components/customerView/addCustomer.html');
             },
 
 

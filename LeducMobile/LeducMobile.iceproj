@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>57bd3a9a-0886-4f03-ad4b-2ecb67115c6d</ProjectGuid>
     <ProjectName>LeducMobile</ProjectName>
@@ -33,7 +33,6 @@
     <Content Include="bower_components\everlive\min\everlive.all.min.js" />
     <Content Include="bower_components\everlive\src\everlive.all.js" />
     <Content Include="bower_components\everlive\src\everlive.all.map" />
-    <Content Include="components\customerView\editCustomer.html" />
     <Content Include="components\customerView\details.html" />
     <Content Include="components\customerView\addCustomer.html" />
     <Content Include="components\customerView\index.js" />

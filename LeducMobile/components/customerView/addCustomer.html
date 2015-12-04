@@ -18,7 +18,7 @@
 
 
 
-<div data-role="view" data-title="addCustomer" data-layout="main-nonav" data-model="app.customerView.customerViewModel" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow" data-bind="events: { show: detailsShow }">
+<div data-role="view" data-title="addCustomer" data-layout="main-nonav" data-model="app.customerView.customerViewModel" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow" >
 
     <header data-role="header">
         <div data-role="navbar" class="header-text">
@@ -64,7 +64,7 @@
 
             <div class="button-group">
                 <a data-role="backbutton">Cancel</a>
-                <a class="primary" data-role="button" data-bind="{click: saveChanges}">Save</a>
+                <a class="primary"  data-role="backbutton" data-bind="{click: saveChanges}">Save</a>
             </div>
         </form>
         <!-- START_CUSTOM_CODE_addCustomerModel -->
