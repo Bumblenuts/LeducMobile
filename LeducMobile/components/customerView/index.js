@@ -204,7 +204,8 @@ app.customerView = kendo.observable({
                     //document.body.appendChild(imgEl);
 
                     customerViewModel.currentItem.Photo = response.result.Id;
-
+                    dataItem['PhotoUrl'] =
+                   processImage(customerViewModel.currentItem.Photo);
         
                   
                 }, function(err) {
