@@ -86,6 +86,10 @@ app.customerView = kendo.observable({
                             field: 'Photo',
                             defaultValue: ''
                         },
+                        'GPS': {
+                            field: 'GPS',
+                            defaultValue: null
+                        },
                     }
                 }
             },
@@ -117,26 +121,111 @@ app.customerView = kendo.observable({
 
             addClick: function (e) {
                 //create a new item.....initialize it as you please
-                var item = { 'Name': '' };
+                var item = { 'CustomerName': 'EnterIt' };
                 //retrieve the data source
                 dataSource = customerViewModel.get('dataSource');
                 dataSource.add(item);
                 dataSource.sync();
-                item = dataSource.at(dataSource.total() - 1);
+                storedItem =item = dataSource.at(dataSource.total() - 1);
                 customerViewModel.set('currentItem', item);
                 app.mobileApp.navigate('#components/customerView/addCustomer.html?uid=' + item.uid);
             },
+           getPointSuccess: function (position) {
+              
+    
+                customerViewModel.currentItem.GPS = new Everlive.GeoPoint(position.coords.longitude /* longitude */, position.coords.latitude  /* latitude */);
 
+               
+
+
+    },
+
+
+  getPointFail: function(message) {
+        alert('Failed because: ' + message);
+
+
+    },
 
             editClick: function (e) {
 
                 app.mobileApp.navigate('#components/customerView/addCustomer.html');
             },
+            getPoint: function(e)
+            {
+                e.preventDefault();
+                navigator.geolocation.getCurrentPosition(this.getPointSuccess, this.getPointFail, gpsoptions);
+                return false;
+            },
 
+
+
+ 
+
+
+
+
+            getPhoto: function(e)
+            {
+ 
+
+                e.preventDefault();
+                    navigator.camera.getPicture(this.onSuccess, this.onFail, {
+                        quality: 50,
+                        encodingType: Camera.EncodingType.JPEG,
+                        sourceType: Camera.PictureSourceType.CAMERA,
+                        destinationType: Camera.DestinationType.DATA_URL
+
+                    });
+                    return false;
+            },
+            
 
             saveChanges: function (e) {
+                e.preventDefault();
                 dataSource.sync();
+                app.mobileApp.navigate('#components/customerView/view.html');
             },
+
+
+            onSuccess: function (imageData) {
+                var file = {
+                    Filename: Math.random().toString(36).substring(2, 15) + ".jpg",
+                    ContentType: "image/jpeg",
+                    base64: imageData,
+                };
+
+                dataProvider.Files.create(file, function (response) {
+                    var fileUri = response.result.Uri;
+
+                    //var imgEl = document.createElement("img");
+                    //imgEl.setAttribute('src', fileUri);
+                    //imgEl.style.position = "absolute";
+                    //document.body.appendChild(imgEl);
+
+                    customerViewModel.currentItem.Photo = response.result.Id;
+
+        
+                  
+                }, function(err) {
+                    navigator.notification.alert("Unfortunately the upload failed: " + err.message);
+                });
+                    
+       
+
+            
+        
+         
+            },
+
+
+
+            onFail: function(e)
+            {
+alert('bad coder');
+            },
+            
+            
 
             currentItem: null
         });
@@ -146,5 +235,6 @@ app.customerView = kendo.observable({
 
 // START_CUSTOM_CODE_customerViewModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
+
 
 // END_CUSTOM_CODE_customerViewModel

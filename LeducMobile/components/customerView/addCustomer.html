@@ -72,16 +72,28 @@
                 <li>
                     <label>
                         Photo:
-                        <button data-bind="value: currentItem.Email" id="getPhotoFromLibraryButton">Add Photo </button>
+                        <button data-bind="click: getPhoto" id="getPhotoFromLibraryButton">Add Photo </button>
+                    </label>
+                     <img data-bind="attr:{src: currentItem.PhotoUrl} " width="30%" height="30%"/>
+
+                </li>
+
+                    <li>
+                    <label>
+                        Location:
+                        <button data-bind="click: getPoint" id="Button1">Use GPS </button>
+                               <p data-bind="text: currentItem.GPS" id="Button2"> </p>
                     </label>
                 </li>
+
+
 
 
             </ul>
 
             <div class="button-group">
                 <a data-role="backbutton">Cancel</a>
-                <a class="primary"  data-role="backbutton" data-bind="{click: saveChanges}">Save</a>
+                <a class="primary"   data-bind="{click: saveChanges}">Save</a>
             </div>
         </form>
         <!-- START_CUSTOM_CODE_addCustomerModel -->
