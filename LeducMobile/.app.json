@@ -50,6 +50,47 @@
       "title": "Customers",
       "addToNavigation": true,
       "icon": "organize"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "addCustomer",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:form",
+          "components": [
+            {
+              "type": "kendo-ui-mobile:field",
+              "name": "customerName",
+              "title": "CustomerName",
+              "inputType": "text"
+            },
+            {
+              "type": "kendo-ui-mobile:field",
+              "name": "address",
+              "title": "Address",
+              "inputType": "text"
+            },
+            {
+              "type": "kendo-ui-mobile:field",
+              "name": "email",
+              "title": "Email",
+              "inputType": "email",
+              "placeholder": "example@example.com"
+            },
+            {
+              "type": "kendo-ui-mobile:field",
+              "name": "mobile",
+              "title": "Mobile",
+              "inputType": "text"
+            }
+          ],
+          "name": "addCustomerModel",
+          "submitButton": "Save",
+          "cancelButton": "Cancel"
+        }
+      ],
+      "title": "Form",
+      "addToNavigation": false
     }
   ],
   "dataProviders": [

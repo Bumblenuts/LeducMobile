@@ -2,17 +2,21 @@
   "ProjectName": "LeducMobile",
   "ProjectGuid": "57bd3a9a-0886-4f03-ad4b-2ecb67115c6d",
   "projectVersion": 1,
-  "AppIdentifier": "com.telerik.LeducMobile",
-  "DisplayName": "LeducMobile",
+  "AppIdentifier": "com.fieldtraks.leducmobile",
+  "DisplayName": "KLPS Snow Contracts",
   "Author": "Dave Branson",
-  "Description": "LeducMobile",
+  "Description": "Leduc Snow Contracts",
   "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
     "2"
   ],
-  "iOSBackgroundMode": [],
+  "iOSBackgroundMode": [
+    "location",
+    "fetch",
+    "remote-notification"
+  ],
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
   "FrameworkVersion": "3.7.0",
   "AndroidPermissions": [
