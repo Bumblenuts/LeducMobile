@@ -6,7 +6,7 @@
   "DisplayName": "KLPS Snow Contracts",
   "Author": "Dave Branson",
   "Description": "Leduc Snow Contracts",
-  "BundleVersion": "1.0",
+  "BundleVersion": "1.151211.01",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -67,5 +67,6 @@
     "org.apache.cordova.splashscreen",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.vibration"
-  ]
+  ],
+  "iOSDeploymentTarget": "6.0"
 }
