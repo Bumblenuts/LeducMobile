@@ -20,7 +20,6 @@ app.customerView = kendo.observable({
                 var setup = dataProvider.setup || {};
                 img = setup.scheme + ':' + setup.url + setup.appId + '/Files/' + img + '/Download';
             }
-
             return img;
         },
 
