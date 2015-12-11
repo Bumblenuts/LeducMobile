@@ -143,50 +143,37 @@ app.customerView = kendo.observable({
 
   getPointFail: function(message) {
         alert('Failed because: ' + message);
-
-
     },
 
             editClick: function (e) {
 
                 app.mobileApp.navigate('#components/customerView/addCustomer.html');
             },
-            getPoint: function(e)
+
+            getPoint: function (e)
             {
                 e.preventDefault();
                 navigator.geolocation.getCurrentPosition(this.getPointSuccess, this.getPointFail, gpsoptions);
                 return false;
             },
 
-
-
- 
-
-
-
-
             getPhoto: function(e)
             {
- 
-
                 e.preventDefault();
                     navigator.camera.getPicture(this.onSuccess, this.onFail, {
                         quality: 50,
                         encodingType: Camera.EncodingType.JPEG,
                         sourceType: Camera.PictureSourceType.CAMERA,
                         destinationType: Camera.DestinationType.DATA_URL
-
                     });
                     return false;
             },
             
-
             saveChanges: function (e) {
                 e.preventDefault();
                 dataSource.sync();
                 app.mobileApp.navigate('#components/customerView/view.html');
             },
-
 
             onSuccess: function (imageData) {
                 var file = {
@@ -211,23 +198,15 @@ app.customerView = kendo.observable({
                 }, function(err) {
                     navigator.notification.alert("Unfortunately the upload failed: " + err.message);
                 });
-                    
-       
-
-            
-        
          
             },
 
 
-
             onFail: function(e)
             {
-alert('bad coder');
+                alert('bad coder');
             },
-            
-            
-
+ 
             currentItem: null
         });
 
