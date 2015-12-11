@@ -5,10 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}") = "LeducMobile", "LeducMobile.iceproj", "{57BD3A9A-0886-4F03-AD4B-2ECB67115C6D}"
 EndProject
-Project("{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}") = "KLPS Mobile", "..\..\Craziness\KLPS Mobile\KLPS Mobile.iceproj", "{C50AC11D-89E9-471E-A349-00D52F3B6A06}"
-EndProject
-Project("{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}") = "FarmHand 2.0", "..\..\FarmHand-2.0\FarmHand 2.0\FarmHand 2.0.iceproj", "{B24E2CE9-3349-4CF9-87C8-D92B5F00DE03}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{57BD3A9A-0886-4F03-AD4B-2ECB67115C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57BD3A9A-0886-4F03-AD4B-2ECB67115C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57BD3A9A-0886-4F03-AD4B-2ECB67115C6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C50AC11D-89E9-471E-A349-00D52F3B6A06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C50AC11D-89E9-471E-A349-00D52F3B6A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C50AC11D-89E9-471E-A349-00D52F3B6A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C50AC11D-89E9-471E-A349-00D52F3B6A06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B24E2CE9-3349-4CF9-87C8-D92B5F00DE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B24E2CE9-3349-4CF9-87C8-D92B5F00DE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B24E2CE9-3349-4CF9-87C8-D92B5F00DE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B24E2CE9-3349-4CF9-87C8-D92B5F00DE03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

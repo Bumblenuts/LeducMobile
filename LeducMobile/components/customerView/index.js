@@ -23,6 +23,7 @@ app.customerView = kendo.observable({
 
             return img;
         },
+
         flattenLocationProperties = function(dataItem) {
             var propName, propValue,
                 isLocation = function(value) {
@@ -41,6 +42,7 @@ app.customerView = kendo.observable({
                 }
             }
         },
+
         dataSourceOptions = {
             type: 'everlive',
             transport: {
@@ -98,6 +100,7 @@ app.customerView = kendo.observable({
             serverPaging: true,
             pageSize: 50
         },
+
         dataSource = new kendo.data.DataSource(dataSourceOptions),
         customerViewModel = kendo.observable({
 
@@ -121,7 +124,7 @@ app.customerView = kendo.observable({
 
             addClick: function (e) {
                 //create a new item.....initialize it as you please
-                var item = { 'CustomerName': 'EnterIt' };
+                var item = { 'CustomerName': '' };
                 //retrieve the data source
                 dataSource = customerViewModel.get('dataSource');
                 dataSource.add(item);
@@ -130,14 +133,10 @@ app.customerView = kendo.observable({
                 customerViewModel.set('currentItem', item);
                 app.mobileApp.navigate('#components/customerView/addCustomer.html?uid=' + item.uid);
             },
+
            getPointSuccess: function (position) {
               
-    
                 customerViewModel.currentItem.GPS = new Everlive.GeoPoint(position.coords.longitude /* longitude */, position.coords.latitude  /* latitude */);
-
-               
-
-
     },
 
 

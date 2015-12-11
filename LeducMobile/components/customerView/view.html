@@ -4,7 +4,7 @@
         <!-- START_CUSTOM_CODE_customerView -->
         <!-- Add custom code here.  -->
 
-        <!--<a data-role="button" data-layout="header" data-bind="{click: customerViewModel.addClick }" data-align="right">Add</a>-->
+        <a data-role="button" data-layout="header" data-bind="{click: customerViewModel.addClick }" data-align="right">Add</a>
 
         <!-- END_CUSTOM_CODE_customerView -->
         <ul data-role="listview" data-style="inset" data-template="customerViewModelTemplate" data-bind="{ source: customerViewModel.dataSource, events: {click: customerViewModel.itemClick}}" data-pull-to-refresh="false" data-endless-scroll="false" data-filterable="{field: 'CustomerName', operator: 'contains'}"></ul>
