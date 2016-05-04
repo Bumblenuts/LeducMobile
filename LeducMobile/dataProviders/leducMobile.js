@@ -4,37 +4,39 @@
     var provider = app.data.leducMobile = new Everlive({
             offlineStorage: true,
             appId: 'dv9510xeop6wzwvn',
-            url: '//platform.telerik.com/bs-api/v1/',
-            scheme: 'https'
+            scheme: 'https',
+            authentication: {
+                persist: true
+            }
         }),
-        accessTokenCacheKey = "access_token",
+        accessTokenCacheKey = 'leducMobile_access_token',
         providerAuthentication = provider.authentication,
         providerLogin = provider.Users.login,
         authentication = {
-            setCachedAccessToken: function(token) {
+            setCachedAccessToken: function setCachedAccessToken(token) {
                 if (localStorage) {
                     localStorage.setItem(accessTokenCacheKey, JSON.stringify(token));
                 } else {
                     app[accessTokenCacheKey] = token;
                 }
             },
-            getCachedAccessToken: function() {
+            getCachedAccessToken: function getCachedAccessToken() {
                 if (localStorage) {
                     return JSON.parse(localStorage.getItem(accessTokenCacheKey));
                 } else {
                     return app[accessTokenCacheKey];
                 }
             },
-            getCacheAccessTokenFn: function(callback) {
+            getCacheAccessTokenFn: function getCacheAccessTokenFn(callback) {
                 return function cacheAccessToken(data) {
                     if (data && data.result) {
                         authentication.setCachedAccessToken(data.result);
-
-                        callback(data);
                     }
+
+                    callback(data);
                 };
             },
-            loadCachedAccessToken: function() {
+            loadCachedAccessToken: function loadCachedAccessToken() {
                 var token = authentication.getCachedAccessToken();
 
                 if (token) {
@@ -42,6 +44,18 @@
                         token.access_token,
                         token.token_type,
                         token.principal_id);
+
+                    provider.Users.currentUser(function _currentUserSuccess(data) {
+                        if (data.result) {
+                            app.user = data.result;
+                        } else {
+                            authentication.setCachedAccessToken(null);
+                            providerAuthentication.clearAuthorization();
+                        }
+                    }, function _currentUserFailure(err) {
+                        authentication.setCachedAccessToken(null);
+                        providerAuthentication.clearAuthorization();
+                    });
                 }
             }
         };
@@ -53,14 +67,33 @@
             authentication.getCacheAccessTokenFn(success), error);
     };
 
-    document.addEventListener('online', function() {
-        app.data.leducMobile.offline(false);
-        app.data.leducMobile.sync();
+    function _readyTimeout() {
+        if (!provider.sbReady) {
+            provider.sbReady = true;
+            provider._emitter.emit('sbReady');
+        }
+    }
+
+    provider.sbProviderReady = function sbProviderReady(callback) {
+        if (provider.sbReady) {
+            return callback();
+        } else {
+            provider.once('sbReady', callback);
+        }
+    }
+
+    document.addEventListener('online', function _appOnline() {
+        provider.offline(false);
+        provider.sync();
+        _readyTimeout();
     });
 
-    document.addEventListener('offline', function() {
-        app.data.leducMobile.offline(true);
+    document.addEventListener('offline', function _appOffline() {
+        provider.offline(true);
+        _readyTimeout();
     });
+
+    window.setTimeout(_readyTimeout, 2000);
 
 }());
 

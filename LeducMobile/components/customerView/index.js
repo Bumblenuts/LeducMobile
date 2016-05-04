@@ -1,5 +1,5 @@
 'use strict';
-var storedItem;
+
 app.customerView = kendo.observable({
     onShow: function() {},
     afterShow: function() {}
@@ -11,6 +11,27 @@ app.customerView = kendo.observable({
 // END_CUSTOM_CODE_customerView
 (function(parent) {
     var dataProvider = app.data.leducMobile,
+        fetchFilteredData = function(paramFilter, searchFilter) {
+            var model = parent.get('customerViewModel'),
+                dataSource = model.get('dataSource');
+
+            if (paramFilter) {
+                model.set('paramFilter', paramFilter);
+            } else {
+                model.set('paramFilter', undefined);
+            }
+
+            if (paramFilter && searchFilter) {
+                dataSource.filter({
+                    logic: 'and',
+                    filters: [paramFilter, searchFilter]
+                });
+            } else if (paramFilter || searchFilter) {
+                dataSource.filter(paramFilter || searchFilter);
+            } else {
+                dataSource.filter({});
+            }
+        },
         processImage = function(img) {
             if (!img) {
                 var empty1x1png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=';
@@ -20,9 +41,9 @@ app.customerView = kendo.observable({
                 var setup = dataProvider.setup || {};
                 img = setup.scheme + ':' + setup.url + setup.appId + '/Files/' + img + '/Download';
             }
+
             return img;
         },
-
         flattenLocationProperties = function(dataItem) {
             var propName, propValue,
                 isLocation = function(value) {
@@ -41,14 +62,12 @@ app.customerView = kendo.observable({
                 }
             }
         },
-
         dataSourceOptions = {
             type: 'everlive',
             transport: {
                 typeName: 'Customers',
                 dataProvider: dataProvider
             },
-
             change: function(e) {
                 var data = this.data();
                 for (var i = 0; i < data.length; i++) {
@@ -58,6 +77,11 @@ app.customerView = kendo.observable({
                         processImage(dataItem['Photo']);
 
                     flattenLocationProperties(dataItem);
+                }
+            },
+            error: function(e) {
+                if (e.xhr) {
+                    alert(JSON.stringify(e.xhr));
                 }
             },
             schema: {
@@ -71,148 +95,67 @@ app.customerView = kendo.observable({
                             field: 'Address',
                             defaultValue: ''
                         },
-                        'HomeTel': {
-                            field: 'HomeTel',
-                            defaultValue: ''
-                        },
-                        'Mobile': {
-                            field: 'Mobile',
-                            defaultValue: ''
-                        },
-                        'Email': {
-                            field: 'Email',
-                            defaultValue: ''
-                        },
                         'Photo': {
                             field: 'Photo',
                             defaultValue: ''
-                        },
-                        'GPS': {
-                            field: 'GPS',
-                            defaultValue: null
                         },
                     }
                 }
             },
             serverFiltering: true,
-            serverSorting: true,
-            serverPaging: true,
-            pageSize: 50
         },
-
         dataSource = new kendo.data.DataSource(dataSourceOptions),
         customerViewModel = kendo.observable({
-
             dataSource: dataSource,
+            searchChange: function(e) {
+                var searchVal = e.target.value,
+                    searchFilter;
 
-            itemClick: function (e) {
-                app.mobileApp.navigate('#components/customerView/details.html?uid=' + e.dataItem.uid);
+                if (searchVal) {
+                    searchFilter = {
+                        field: 'Address',
+                        operator: 'contains',
+                        value: searchVal
+                    };
+                }
+                fetchFilteredData(customerViewModel.get('paramFilter'), searchFilter);
             },
+            itemClick: function(e) {
 
-            detailsShow: function (e) {
+                app.mobileApp.navigate('#components/customerView/details.html?uid=' + e.dataItem.uid);
+
+            },
+            detailsShow: function(e) {
                 var item = e.view.params.uid,
-                
                     dataSource = customerViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
+
                 if (!itemModel.CustomerName) {
                     itemModel.CustomerName = String.fromCharCode(160);
                 }
-                storedItem = itemModel;
+
+                customerViewModel.set('currentItem', null);
                 customerViewModel.set('currentItem', itemModel);
             },
-
-            addClick: function (e) {
-                //create a new item.....initialize it as you please
-                var item = { 'CustomerName': '' };
-                //retrieve the data source
-                dataSource = customerViewModel.get('dataSource');
-                dataSource.add(item);
-                dataSource.sync();
-                storedItem =item = dataSource.at(dataSource.total() - 1);
-                customerViewModel.set('currentItem', item);
-                app.mobileApp.navigate('#components/customerView/addCustomer.html?uid=' + item.uid);
-            },
-
-           getPointSuccess: function (position) {
-              
-                customerViewModel.currentItem.GPS = new Everlive.GeoPoint(position.coords.longitude /* longitude */, position.coords.latitude  /* latitude */);
-    },
-
-
-  getPointFail: function(message) {
-        alert('Failed because: ' + message);
-    },
-
-            editClick: function (e) {
-
-                app.mobileApp.navigate('#components/customerView/addCustomer.html');
-            },
-
-            getPoint: function (e)
-            {
-                e.preventDefault();
-                navigator.geolocation.getCurrentPosition(this.getPointSuccess, this.getPointFail, gpsoptions);
-                return false;
-            },
-
-            getPhoto: function(e)
-            {
-                e.preventDefault();
-                    navigator.camera.getPicture(this.onSuccess, this.onFail, {
-                        quality: 50,
-                        encodingType: Camera.EncodingType.JPEG,
-                        sourceType: Camera.PictureSourceType.CAMERA,
-                        destinationType: Camera.DestinationType.DATA_URL
-                    });
-                    return false;
-            },
-            
-            saveChanges: function (e) {
-                e.preventDefault();
-                dataSource.sync();
-                app.mobileApp.navigate('#components/customerView/view.html');
-            },
-
-            onSuccess: function (imageData) {
-                var file = {
-                    Filename: Math.random().toString(36).substring(2, 15) + ".jpg",
-                    ContentType: "image/jpeg",
-                    base64: imageData,
-                };
-
-                dataProvider.Files.create(file, function (response) {
-                    var fileUri = response.result.Uri;
-
-                    //var imgEl = document.createElement("img");
-                    //imgEl.setAttribute('src', fileUri);
-                    //imgEl.style.position = "absolute";
-                    //document.body.appendChild(imgEl);
-
-                    customerViewModel.currentItem.Photo = response.result.Id;
-                    dataItem['PhotoUrl'] =
-                   processImage(customerViewModel.currentItem.Photo);
-        
-                  
-                }, function(err) {
-                    navigator.notification.alert("Unfortunately the upload failed: " + err.message);
-                });
-         
-            },
-
-
-            onFail: function(e)
-            {
-                alert('bad coder');
-            },
- 
             currentItem: null
         });
 
-    parent.set('customerViewModel', customerViewModel);
+    if (typeof dataProvider.sbProviderReady === 'function') {
+        dataProvider.sbProviderReady(function dl_sbProviderReady() {
+            parent.set('customerViewModel', customerViewModel);
+        });
+    } else {
+        parent.set('customerViewModel', customerViewModel);
+    }
+
+    parent.set('onShow', function(e) {
+        var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null;
+
+        fetchFilteredData(param);
+    });
 })(app.customerView);
 
 // START_CUSTOM_CODE_customerViewModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
-
 
 // END_CUSTOM_CODE_customerViewModel

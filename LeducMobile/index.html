@@ -5,8 +5,9 @@
     <title></title>
     <meta charset="utf-8">
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
+
+    <link href="styles/overrides.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
-    <link href="styles/custom.css" rel="stylesheet">
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
@@ -18,6 +19,7 @@
 
 <body id="kendoUiMobileApp">
     <script src="components/map/index.js"></script>
+    <script src="components/addCustomer/index.js"></script>
     <script src="components/customerView/index.js"></script>
     <script src="components/settingsView/index.js"></script>
     <script src="components/homeView/index.js"></script>
@@ -27,9 +29,6 @@
                 <span data-role="view-title"></span>
             </div>
         </header>
-
-        <!-- application views will be rendered here -->
-
         <footer data-role="footer">
             <div data-role="tabstrip" id="navigation-container">
                 <a href="components/settingsView/view.html" data-icon="settings">Settings</a>
@@ -45,9 +44,6 @@
                 <span data-role="view-title"></span>
             </div>
         </header>
-
-        <!-- application views will be rendered here -->
-
         <footer data-role="footer">
         </footer>
     </div>

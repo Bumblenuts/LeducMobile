@@ -1,25 +1,18 @@
 <div data-role="view" data-title="KLPS Snow Contracts" data-layout="main-nonav" data-model="app.homeView" data-show="app.homeView.onShow" data-after-show="app.homeView.afterShow">
-    <!--<a href="view.html">view.html</a>-->
-
     <div class="signin-view">
-
-         <img src="../../images/plowtruck.jpg"  class="centered"/>
-
-        <h3 align="center">Login</h3>
-
         <form>
             <ul data-role="listview" data-style="inset">
                 <li>
-                    <label>Email :
+                    <label>Email
                         <input type="email" data-bind="value: homeViewModel.email" required autofocus>
                     </label>
                 </li>
                 <li>
-                    <label>Password:
+                    <label>Password
                         <input type="password" data-bind="value: homeViewModel.password" required>
                     </label>
                 </li>
-            </ul>s
+            </ul>
 
             <div class="button-group button-group-vertical">
                 <a data-role="button" class="primary" data-bind="events: { click: homeViewModel.signin }">Sign In</a>
@@ -27,7 +20,6 @@
             </div>
         </form>
     </div>
-
     <div class="offline" align="center" style="display:none;">
         You are currently offline. Before using this app in offline mode you must initialize it while you are online
     </div>

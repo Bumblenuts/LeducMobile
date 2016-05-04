@@ -20,20 +20,6 @@
             if (navigator && navigator.splashscreen) {
                 navigator.splashscreen.hide();
             }
-
-            var element = document.getElementById('appDrawer');
-            if (typeof(element) != 'undefined' && element !== null) {
-                if (window.navigator.msPointerEnabled) {
-                    $('#navigation-container').on('MSPointerDown', 'a', function(event) {
-                        app.keepActiveState($(this));
-                    });
-                } else {
-                    $('#navigation-container').on('touchstart', 'a', function(event) {
-                        app.keepActiveState($(this));
-                    });
-                }
-            }
-
             bootstrap();
         }, false);
     } else {
@@ -42,7 +28,7 @@
 
     app.keepActiveState = function _keepActiveState(item) {
         var currentItem = item;
-        $('#navigation-container li a.active').removeClass('active');
+        $('#navigation-container li.active').removeClass('active');
         currentItem.addClass('active');
     };
 
@@ -74,29 +60,28 @@ function onDeviceReady() {
     navigator.splashscreen.hide();
 }
 
-
-function cameraApp() { }
+function cameraApp() {}
 
 cameraApp.prototype = {
     _pictureSource: null,
 
     _destinationType: null,
 
-    run: function () {
+    run: function() {
         var that = this;
         that._pictureSource = navigator.camera.PictureSourceType;
         that._destinationType = navigator.camera.DestinationType;
-        id("capturePhotoButton").addEventListener("click", function () {
+        id("capturePhotoButton").addEventListener("click", function() {
             that._capturePhoto.apply(that, arguments);
         });
     },
 
-    _capturePhoto: function () {
+    _capturePhoto: function() {
         var that = this;
         // Take picture using device camera and retrieve image as base64-encoded string.
-        navigator.camera.getPicture(function () {
+        navigator.camera.getPicture(function() {
             that._onPhotoDataSuccess.apply(that, arguments);
-        }, function () {
+        }, function() {
             that._onFail.apply(that, arguments);
         }, {
             quality: 50,
@@ -104,13 +89,12 @@ cameraApp.prototype = {
         });
     },
 
-
-    _getPhoto: function (source) {
+    _getPhoto: function(source) {
         var that = this;
         // Retrieve image file location from specified source.
-        navigator.camera.getPicture(function () {
+        navigator.camera.getPicture(function() {
             that._onPhotoURISuccess.apply(that, arguments);
-        }, function () {
+        }, function() {
             cameraApp._onFail.apply(that, arguments);
         }, {
             quality: 50,
@@ -119,7 +103,7 @@ cameraApp.prototype = {
         });
     },
 
-    _onPhotoDataSuccess: function (imageData) {
+    _onPhotoDataSuccess: function(imageData) {
         var smallImage = document.getElementById('smallImage');
         smallImage.style.display = 'block';
 
@@ -127,7 +111,7 @@ cameraApp.prototype = {
         smallImage.src = "data:image/jpeg;base64," + imageData;
     },
 
-    _onPhotoURISuccess: function (imageURI) {
+    _onPhotoURISuccess: function(imageURI) {
         var smallImage = document.getElementById('smallImage');
         smallImage.style.display = 'block';
 
@@ -135,12 +119,10 @@ cameraApp.prototype = {
         smallImage.src = imageURI;
     },
 
-    _onFail: function (message) {
+    _onFail: function(message) {
         alert(message);
     }
 }
-
-
 
 // Lookup object we'll be using to map file
 // extension to mime type values
@@ -155,7 +137,7 @@ var AppHelper = {
     // produces the 'download' url for a given
     // file record id. This allows us, for ex,
     // to src an image in an img tag, etc.
-    resolveImageUrl: function (id) {
+    resolveImageUrl: function(id) {
         if (id) {
             return el.Files.getDownloadUrl(id);
         } else {
@@ -164,21 +146,21 @@ var AppHelper = {
     },
     // helper function to produce the base64
     // for a given file input item
-    getBase64ImageFromInput: function (input, cb) {
+    getBase64ImageFromInput: function(input, cb) {
         var reader = new FileReader();
-        reader.onloadend = function (e) {
+        reader.onloadend = function(e) {
             if (cb) cb(e.target.result);
         };
         reader.readAsDataURL(input);
     },
     // produces the appropriate object structure
     // necessary for Everlive to store our file
-    getImageFileObject: function (input, cb) {
+    getImageFileObject: function(input, cb) {
         var name = input.name;
         var ext = name.substr(name.lastIndexOf('.') + 1).toLowerCase();
         var mimeType = mimeMap[ext];
         if (mimeType) {
-            this.getBase64ImageFromInput(input, function (base64) {
+            this.getBase64ImageFromInput(input, function(base64) {
                 var res = {
                     "Filename": name,
                     "ContentType": mimeType,

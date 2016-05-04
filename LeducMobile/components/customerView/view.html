@@ -1,23 +1,28 @@
+<div data-role="view" data-title="Customers" data-layout="main" data-model="app.customerView" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow">
 
-    <div data-role="view" data-title="Customers" data-layout="main" data-model="app.customerView" data-show="app.customerView.onShow" data-after-show="app.customerView.afterShow">
+    <!-- START_CUSTOM_CODE_customerView -->
+    <!-- Add custom code here.  -->
 
-        <!-- START_CUSTOM_CODE_customerView -->
-        <!-- Add custom code here.  -->
+    <a data-role="button" data-layout="header" data-bind="{click: customerViewModel.addClick }" data-align="right">Add</a>
 
-        <a data-role="button" data-layout="header" data-bind="{click: customerViewModel.addClick }" data-align="right">Add</a>
+    <!-- END_CUSTOM_CODE_customerView -->
+    <form class="km-filter-form custom-filter">
 
-        <!-- END_CUSTOM_CODE_customerView -->
-        <ul data-role="listview" data-style="inset" data-template="customerViewModelTemplate" data-bind="{ source: customerViewModel.dataSource, events: {click: customerViewModel.itemClick}}" data-pull-to-refresh="false" data-endless-scroll="false" data-filterable="{field: 'CustomerName', operator: 'contains'}"></ul>
-        <!-- START_CUSTOM_CODE_customerViewModel -->
-        <!-- Add custom code here. -->
-        <!-- END_CUSTOM_CODE_customerViewModel -->
-        <script type="text/x-kendo-template" id="customerViewModelTemplate">
-            <div class="image-with-text">
-                <img src="#: data['PhotoUrl'] #" width="30%" height="30%">
-                <!--<h3>#: data['Photo'] #</h3>-->
-                <h3>#: data['CustomerName'] #</h3>
-                <p>#: data['Address'] #</p>
-            </div>
-        </script>
-    </div>
 
+        <div class="km-filter-wrap">
+            <input type="serach" placeholder="Search..." data-bind="{events:{keyup: customerViewModel.searchChange}}">
+        </div>
+    </form>
+    <ul data-role="listview" data-auto-bind="false" data-style="inset" data-template="customerViewModelTemplate" data-bind="{ source: customerViewModel.dataSource, events: {click: customerViewModel.itemClick} }" data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+    <!-- START_CUSTOM_CODE_customerViewModel -->
+    <!-- Add custom code here. -->
+    <!-- END_CUSTOM_CODE_customerViewModel -->
+    <script type="text/x-kendo-template" id="customerViewModelTemplate">
+        <div class="image-with-text">
+            <img src="#: data['PhotoUrl'] #" width="30%" height="30%">
+            <h3>#: data['CustomerName'] #</h3>
+            <p>#: data['Address'] #</p>
+        </div>
+    </script>
+</div>

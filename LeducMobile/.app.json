@@ -13,7 +13,9 @@
           "passwordLabel": "Password",
           "signinLabel": "Sign In",
           "signinRedirect": "customerView",
-          "enableRegistration": false
+          "enableRegistration": false,
+          "enableLogout": false,
+          "enableRememberme": false
         }
       ],
       "title": "KLPS Snow Contracts",
@@ -32,19 +34,26 @@
       "name": "customerView",
       "components": [
         {
-          "type": "kendo-ui-mobile:list",
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
           "name": "customerViewModel",
           "dataProvider": "leducMobile",
           "collection": "Customers",
-          "imageField": "Photo",
           "headerField": "CustomerName",
+          "imageField": "Photo",
           "subHeaderField": "Address",
           "filterField": "Address",
-          "masterDetails": true,
-          "detailHeaderField": "CustomerName",
-          "detailSubHeaderField": "Email",
           "pullToRefresh": false,
-          "endlessScroll": false
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "deleteItemConfirmation": true,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "detailSubHeaderField": "Email",
+          "addItemForm": false,
+          "editItemForm": false
         }
       ],
       "title": "Customers",
@@ -62,26 +71,30 @@
               "type": "kendo-ui-mobile:field",
               "name": "customerName",
               "title": "CustomerName",
-              "inputType": "text"
+              "inputType": "text",
+              "titlePosition": "left"
             },
             {
               "type": "kendo-ui-mobile:field",
               "name": "address",
               "title": "Address",
-              "inputType": "text"
+              "inputType": "text",
+              "titlePosition": "left"
             },
             {
               "type": "kendo-ui-mobile:field",
               "name": "email",
               "title": "Email",
               "inputType": "email",
+              "titlePosition": "left",
               "placeholder": "example@example.com"
             },
             {
               "type": "kendo-ui-mobile:field",
               "name": "mobile",
               "title": "Mobile",
-              "inputType": "text"
+              "inputType": "text",
+              "titlePosition": "left"
             }
           ],
           "name": "addCustomerModel",
@@ -116,5 +129,9 @@
   "navigation": "tabstrip",
   "view": "homeView",
   "transition": "slide",
-  "skin": "flat"
+  "showMoreTab": false,
+  "skin": "flat",
+  "skinMainColor": "#1a1a1a",
+  "skinTextColor": "#ffffff",
+  "skinAccentColor": "#10c4b2"
 }

@@ -30,11 +30,21 @@ app.homeView = kendo.observable({
             } else {
                 $(activeView).show().siblings().hide();
             }
+
         },
         successHandler = function(data) {
-            var redirect = signinRedirect;
+            var redirect = signinRedirect,
+                model = parent.homeViewModel || {},
+                logout = model.logout;
 
+            if (logout) {
+                model.set('logout', null);
+            }
             if (data && data.result) {
+                if (logout) {
+                    provider.Users.logout(init, init);
+                    return;
+                }
                 app.user = data.result;
 
                 setTimeout(function() {
@@ -74,7 +84,10 @@ app.homeView = kendo.observable({
         });
 
     parent.set('homeViewModel', homeViewModel);
-    parent.set('afterShow', function() {
+    parent.set('afterShow', function(e) {
+        if (e && e.view && e.view.params && e.view.params.logout) {
+            homeViewModel.set('logout', true);
+        }
         provider.Users.currentUser().then(successHandler, init);
     });
 })(app.homeView);
