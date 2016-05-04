@@ -2,7 +2,7 @@
   "ProjectName": "LeducMobile",
   "ProjectGuid": "57bd3a9a-0886-4f03-ad4b-2ecb67115c6d",
   "projectVersion": 1,
-  "AppIdentifier": "com.fieldtraks.leducmobile",
+  "AppIdentifier": "com.fieldtraks.klps",
   "DisplayName": "KLPS Snow Contracts",
   "Author": "Dave Branson",
   "Description": "Leduc Snow Contracts",
